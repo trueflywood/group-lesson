@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class FemaleConnections extends Connections {
 
@@ -35,15 +36,15 @@ public class FemaleConnections extends Connections {
     }
 
 
-    //  TODO РЕАЛИЗОВАТЬ
     @Override
-    public String toString() {
-        return super.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FemaleConnections that)) return false;
+        return getType() == that.getType() && Objects.equals(getPerson(), that.getPerson());
     }
 
-    // TODO реализовать
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(getType(), getPerson());
     }
 }

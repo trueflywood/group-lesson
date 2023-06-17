@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class MaleConnections extends Connections {
     public MaleTypeConnections getType() {
         return type;
@@ -30,16 +32,15 @@ public class MaleConnections extends Connections {
         this.type = typeConnections;
     }
 
-    //  TODO РЕАЛИЗОВАТЬ
     @Override
-    public String toString() {
-        return super.toString();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MaleConnections that)) return false;
+        return getType() == that.getType() && Objects.equals(getPerson(), that.getPerson());
     }
 
-    // TODO реализовать
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(getType(), getPerson());
     }
-
 }
