@@ -1,11 +1,11 @@
 class Person{
     private String name;
     private String surname;
-    private long phone;
+    private String phone;
     private String gender;
     private int age;
 
-    public Person(String name, String surname, long phone, String gender, int age, String type) {
+    public Person(String name, String surname, String phone, String gender, int age, String type) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
@@ -30,11 +30,11 @@ class Person{
         this.surname = surname;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -72,7 +72,8 @@ class Person{
         return this.name + " " + this.surname + " " + this.phone + " " + this.gender + " " + this.age + " " + this.type;}
 }
 public class Main {
-
-
+    public static void main(String[] args) {
+        
+    }
 }
 
