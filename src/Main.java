@@ -77,7 +77,6 @@ class Person{
         return this.name + " " + this.surname + " " + this.phone + " " + this.gender + " " + this.age + " " + this.type;}
 }
 public class Main {
-<<<<<<< HEAD
     public static void main(String[] args) {
         int select = 0;
         Scanner scanner;
@@ -101,8 +100,5 @@ public class Main {
             list.add(person);
         }
     }
-=======
-    public static void main(String[] args) {}
->>>>>>> c7aca1b578e19821477baaa464769d9018aa30b9
 }
 
