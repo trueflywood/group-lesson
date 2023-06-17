@@ -72,7 +72,7 @@ class Person{
         return this.name + " " + this.surname + " " + this.phone + " " + this.gender + " " + this.age + " " + this.type;}
 }
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("");
-    }
+
+
 }
+
