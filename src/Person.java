@@ -1,6 +1,8 @@
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
-public class Person {
+public abstract class Person {
 
     /**
      * идентификатор человека
@@ -12,6 +14,8 @@ public class Person {
     private String phone;
 
     private int age;
+
+    private HashSet<Person>  relatives =  new HashSet<Person>();
 
     public Person(String name, String surname, String phone, int age, String type) {
         this.name = name;
@@ -82,6 +86,27 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getSurname(), getPhone(), getAge(), getType());
+    }
+
+    public  void addConnection(Connections connection, Person person) {
+
+    };
+
+    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) {
+
+    };
+
+    public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {
+
+    };
+
+    public HashSet<Person> getRelatives() {
+        return relatives;
+    }
+
+
+    public void addRelative(Person person) {
+        this.relatives.add(person);
     }
 }
 

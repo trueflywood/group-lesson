@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -5,16 +6,16 @@ public class Male extends Person {
 
     final Gender gender = Gender.MALE;
 
-    private List<MaleConnections> connections;
+    private List<MaleConnections.MaleTypeConnections> connections;
     public Male(String name, String surname, String phone, int age, String type) {
         super(name, surname, phone, age, type);
     }
 
-    public List<MaleConnections> getConnections() {
+    public List<MaleConnections.MaleTypeConnections> getConnections() {
         return connections;
     }
 
-    public void setConnections(List<MaleConnections> connections) {
+    public void setConnections(List<MaleConnections.MaleTypeConnections> connections) {
         this.connections = connections;
     }
 
@@ -40,10 +41,21 @@ public class Male extends Person {
      * Кем я являюсь другому человеку PERSON
      * @param person другой человек
      */
-    public void addRelative(Person person) {
 
+    @Override
+    public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {
 
+        this.connections.add(connection);
+        person.addRelative(this);
     }
 
 
+    /**
+     * получение списка родственников первой очереди.
+     * @return
+     */
+    @Override
+    public HashSet<Person> getRelatives() {
+        return super.getRelatives();
+    }
 }
