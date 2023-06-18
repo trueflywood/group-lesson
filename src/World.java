@@ -12,7 +12,7 @@ public class World {
         listPerson = new HashSet<Person>();
     }
 
-    public generatePerson() {
+    public void generatePerson() {
 
     }
 }
