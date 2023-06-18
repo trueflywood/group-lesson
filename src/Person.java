@@ -15,7 +15,6 @@ public class Person {
         this.age = age;
         this.type = type;
     }
-
     public String getName() {
         return name;
     }
