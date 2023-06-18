@@ -2,20 +2,20 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    enum ActionСodes {
+    enum ActionCodes {
         EXIT(0, "ВЫХОД"),
         CREATE(1, "Создать"),
         DELETE(2, "Удалить"),
         READ(3, "Прочитать"),
         UPDATE(4, "Изменить имя");
 
-        ActionСodes(int codeAction, String text) {
+        ActionCodes(int codeAction, String text) {
             this.code = codeAction;
             this.text = text;
         }
 
-        public static ActionСodes byOrdinal(int ord) throws Exception {
-            for (ActionСodes m : ActionСodes.values()) {
+        public static ActionCodes byOrdinal(int ord) throws Exception {
+            for (ActionCodes m : ActionCodes.values()) {
                 if (m.code == ord) {
                     return m;
                 }
@@ -28,19 +28,19 @@ public class MainMenu {
 
     }
 
-    public ActionСodes showMainMenu() throws Exception {
-        ActionСodes selectCodeAction;
+    public ActionCodes showMainMenu() throws Exception {
+        ActionCodes selectCodeAction;
 
         do {
             System.out.println("Выберите действие:");
-            for (ActionСodes m : ActionСodes.values()) {
+            for (ActionCodes m : ActionCodes.values()) {
                 System.out.println("    " + m.code + " - " + m.text);
             }
 
             try {
                 Scanner scanner = new Scanner(System.in);
                 Integer select = scanner.nextInt();
-                selectCodeAction = ActionСodes.byOrdinal(select);
+                selectCodeAction = ActionCodes.byOrdinal(select);
                 return selectCodeAction;
             } catch (Exception e) {
                 System.out.println("Не правильный код выбора");
