@@ -87,3 +87,4 @@ public class Person {
         return Objects.hash(getName(), getSurname(), getPhone(), getGender(), getAge(), getType());
     }
 }
+
