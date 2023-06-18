@@ -33,7 +33,11 @@ public class Female extends Person {
 
 
 
-    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) {
+    /**
+     * Кем я являюсь другому человеку PERSON
+     * @param person другой человек
+     */
+    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) {  // TODO Добавить проверку на правильность добавления связи
         System.out.println("++++++++++++++");
         this.connections.put(person, connection);
         System.out.println(this);

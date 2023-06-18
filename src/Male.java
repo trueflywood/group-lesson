@@ -38,8 +38,7 @@ public class Male extends Person {
      * Кем я являюсь другому человеку PERSON
      * @param person другой человек
      */
-
-    public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {
+    public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {   // TODO Добавить проверку на правильность добавления связи
 
          this.connections.put(person, connection);
         if (person instanceof  Male) {

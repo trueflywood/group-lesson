@@ -18,6 +18,7 @@ public class FemaleConnections extends Connections {
         this.type = type;
     }
 
+    // TODO Добавить "дочь"
     enum FemaleTypeConnections {
         mother,
         wife
