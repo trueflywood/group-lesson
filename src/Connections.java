@@ -1,7 +1,7 @@
 import java.util.Objects;
 
 public abstract class Connections {
-    private Object type;
+    public Object type;
     private Person person;
 
 }

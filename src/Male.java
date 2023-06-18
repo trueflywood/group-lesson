@@ -1,27 +1,24 @@
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Male extends Person {
 
     final Gender gender = Gender.MALE;
 
-    private List<MaleConnections.MaleTypeConnections> connections;
-    public Male(String name, String surname, String phone, int age, String type) {
-        super(name, surname, phone, age, type);
+    private HashMap<Person, MaleConnections.MaleTypeConnections> connections = new HashMap<>();
+    public Male(String name, String surname, String phone, int age) {
+        super(name, surname, phone, age);
     }
 
-    public List<MaleConnections.MaleTypeConnections> getConnections() {
+
+    public HashMap<Person, MaleConnections.MaleTypeConnections> getConnections() {
         return connections;
     }
 
-    public void setConnections(List<MaleConnections.MaleTypeConnections> connections) {
-        this.connections = connections;
-    }
+
 
    @Override
     public String toString() {
-        return super.toString()+  "=" + gender;
+        return super.toString()+  "=" + gender + "=" + this.connections;
     }
 
     @Override
@@ -42,20 +39,21 @@ public class Male extends Person {
      * @param person другой человек
      */
 
-    @Override
     public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {
 
-        this.connections.add(connection);
-        person.addRelative(this);
+         this.connections.put(person, connection);
+        if (person instanceof  Male) {
+            if (!((Male) person).getConnections().containsKey(this)) {
+                System.out.println("test 1 male");
+                ((Male) person).addConnection(connection, this);
+            }
+        }
+        if (person instanceof  Female) {
+            if (!((Female) person).getConnections().containsKey(this)) {
+                System.out.println("test 2 male");
+                ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.wife, this);
+            }
+        }
     }
 
-
-    /**
-     * получение списка родственников первой очереди.
-     * @return
-     */
-    @Override
-    public HashSet<Person> getRelatives() {
-        return super.getRelatives();
-    }
 }

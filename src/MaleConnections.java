@@ -42,4 +42,12 @@ public class MaleConnections extends Connections {
     public int hashCode() {
         return Objects.hash(getType(), getPerson());
     }
+
+    @Override
+    public String toString() {
+        return "MaleConnections{" +
+                "type=" + type +
+                ", person=" + person +
+                "} " + super.toString();
+    }
 }

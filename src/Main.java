@@ -9,19 +9,51 @@ public class Main {
     public static void main(String[] args) {
         HashSet<Person> people = new HashSet<Person>();
 
-        people.add(new Male("Такеши", "Китано","88005553535",76,"Брат"));
-        people.add(new Male("Алексей", "Абрамович","3743437863478",63,"Дальний родственник"));
-        people.add(new Female("Аяко", "Саичиро","478546567878",32,"Супруга"));
-        people.add(new Female("Милана", "Янковки","56474637656",35,"Сестра"));
+        people.add(new Male("Такеши", "Китано","88005553535",76));
+        people.add(new Male("Алексей", "Абрамович","3743437863478",63));
+        people.add(new Female("Аяко", "Саичиро","478546567878",32));
+        people.add(new Female("Милана", "Янковки","56474637656",35));
 
-        System.out.println("""
-                Изменить имя  -> Press 1
-                Прочитать     -> Press 2
-                Создать       -> Press 3
-                Удалить       -> Press 4
-                Выход         -> Press 5
-                """);
-        System.out.println(people);
+        // Пример создания людей
+        Person testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45);
+        Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45);
+        people.add(testPerson1);
+        people.add(testPerson2);
+
+        // Пример поиска людей в списке
+        Person pp = people.stream()
+                .filter(object -> object.getName().equals("Алекс"))
+                .findFirst().get();
+
+
+        // Пример добавления связи. сразу устанавливаются 2 связи от testPerson1 к testPerson2 и от testPerson2 к  testPerson1
+        ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
+
+        //при повторной установке связь изменится
+        ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.husband, testPerson2);
+
+        //System.out.println(people);
+
+        System.out.println("--");
+        System.out.println(pp);
+        System.out.println("==");
+
+        System.out.println("--+++++");
+        System.out.println(testPerson2);
+        System.out.println("==");
+
+
+
+        // Пример вызова меню
+        MainMenu menu = new MainMenu();
+
+        try {
+            MainMenu.ActionCodes mainChose = menu.showMainMenu();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
 

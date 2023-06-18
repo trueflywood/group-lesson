@@ -1,13 +1,6 @@
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class Person {
-
-    /**
-     * идентификатор человека
-     */
-    static Integer id;
 
     private String name;
     private String surname;
@@ -15,14 +8,12 @@ public abstract class Person {
 
     private int age;
 
-    private HashSet<Person>  relatives =  new HashSet<Person>();
 
-    public Person(String name, String surname, String phone, int age, String type) {
+    public Person(String name, String surname, String phone, int age) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.age = age;
-        this.type = type;
     }
 
     public String getName() {
@@ -57,56 +48,28 @@ public abstract class Person {
         this.age = age;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    private String type;
 
     @Override
     public String toString() {
-        return this.name + "=" + this.surname + "=" + this.phone + "=" + this.age + "=" + this.type;
+        return this.name + "=" + this.surname + "=" + this.phone + "=" + this.age;
     }
 
     public String inFo() {
-        return this.name + " " + this.surname + " " + this.phone + " " + this.age + " " + this.type;
+        return this.name + " " + this.surname + " " + this.phone + " " + this.age;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Person person)) return false;
-        return getAge() == person.getAge() && Objects.equals(getName(), person.getName()) && Objects.equals(getSurname(), person.getSurname()) && Objects.equals(getPhone(), person.getPhone()) && Objects.equals(getType(), person.getType());
+        return getAge() == person.getAge() && Objects.equals(getName(), person.getName()) && Objects.equals(getSurname(), person.getSurname()) && Objects.equals(getPhone(), person.getPhone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getPhone(), getAge(), getType());
-    }
-
-    public  void addConnection(Connections connection, Person person) {
-
-    };
-
-    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) {
-
-    };
-
-    public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) {
-
-    };
-
-    public HashSet<Person> getRelatives() {
-        return relatives;
+        return Objects.hash(getName(), getSurname(), getPhone(), getAge());
     }
 
 
-    public void addRelative(Person person) {
-        this.relatives.add(person);
-    }
 }
 
