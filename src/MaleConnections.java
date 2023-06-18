@@ -19,7 +19,6 @@ public class MaleConnections extends Connections {
 
     enum MaleTypeConnections {
         father,
-        son,
         husband,
     }
     private MaleTypeConnections type;

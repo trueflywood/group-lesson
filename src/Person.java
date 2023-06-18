@@ -83,5 +83,6 @@ public class Person {
     public int hashCode() {
         return Objects.hash(getName(), getSurname(), getPhone(),  getAge(), getType());
     }
-}
+
+
 

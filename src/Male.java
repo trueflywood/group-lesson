@@ -36,6 +36,14 @@ public class Male extends Person {
         return Objects.hash(super.hashCode(), gender);
     }
 
+    /**
+     * Кем я являюсь другому человеку PERSON
+     * @param person другой человек
+     */
+    public void addRelative(Person person) {
+
+
+    }
 
 
 }
