@@ -13,13 +13,14 @@ public class Person {
 
     private int age;
 
-    public Person(String name, String surname, String phone,  int age, String type) {
+    public Person(String name, String surname, String phone, int age, String type) {
         this.name = name;
         this.surname = surname;
         this.phone = phone;
         this.age = age;
         this.type = type;
     }
+
     public String getName() {
         return name;
     }
@@ -80,7 +81,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getSurname(), getPhone(),  getAge(), getType());
+        return Objects.hash(getName(), getSurname(), getPhone(), getAge(), getType());
     }
 }
 
