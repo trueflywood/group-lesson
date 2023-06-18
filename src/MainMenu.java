@@ -3,11 +3,12 @@ import java.util.Scanner;
 public class MainMenu {
 
     enum ActionCodes {
-        EXIT(0, "ВЫХОД"),
+
         CREATE(1, "Создать"),
-        DELETE(2, "Удалить"),
-        READ(3, "Прочитать"),
-        UPDATE(4, "Изменить имя");
+        READ(2, "Прочитать"),
+        UPDATE(3, "Изменить имя"),
+        DELETE(4, "Удалить"),
+        EXIT(5, "ВЫХОД");
 
         ActionCodes(int codeAction, String text) {
             this.code = codeAction;
