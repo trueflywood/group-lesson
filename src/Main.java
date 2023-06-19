@@ -40,6 +40,7 @@ public class Main {
             System.out.println("Ошибка: " + e.getMessage());
         }
 
+        // примеры генерации ошибокдобавления связей
         try {
             testPerson3.addConnection(FemaleConnections.FemaleTypeConnections.wife, testPerson2); // генерируем ошибку
         } catch (Exception e) {
