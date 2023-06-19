@@ -17,10 +17,10 @@ public class MaleConnections extends Connections {
         this.person = person;
     }
 
-    // TODO Добавить "сын"
     enum MaleTypeConnections {
         father,
         husband,
+        son
     }
     private MaleTypeConnections type;
 

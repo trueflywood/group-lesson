@@ -37,25 +37,45 @@ public class Female extends Person {
      * Кем я являюсь другому человеку PERSON
      * @param person другой человек
      */
-    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) {  // TODO Добавить проверку на правильность добавления связи
-        System.out.println("++++++++++++++");
+    public void addConnection(FemaleConnections.FemaleTypeConnections connection, Person person) throws Exception {  // TODO Добавить проверку на правильность добавления связи
         this.connections.put(person, connection);
-        System.out.println(this);
         if (person instanceof  Male) {
-            System.out.println("++++++++++++++");
             if (!((Male) person).getConnections().containsKey(this)) {
-                System.out.println("test 1 female");
-                ((Male) person).addConnection(MaleConnections.MaleTypeConnections.father, this);
+                try {
+                    switch (connection) {
+                        case mother -> {
+                            ((Male) person).addConnection(MaleConnections.MaleTypeConnections.son, this);
+                        }
+                        case wife -> {
+                            ((Male) person).addConnection(MaleConnections.MaleTypeConnections.husband, this);
+                        }
+                        case daughter -> {
+                            ((Male) person).addConnection(MaleConnections.MaleTypeConnections.father, this);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ошибка: " + e.getMessage());
+                }
+
             }
         }
         if (person instanceof  Female) {
             if (!((Female) person).getConnections().containsKey(this)) {
                 System.out.println("test 2 female");
-                ((Female) person).addConnection(connection, this);
+
+                switch (connection) {
+                    case mother -> {
+                        ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.daughter, this);
+                    }
+                    case wife -> {
+                        throw new Exception("У женщины не может быть жены");
+                    }
+                    case daughter -> {
+                        ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.mother, this);
+                    }
+                }
             }
         }
-
-
 
     }
 

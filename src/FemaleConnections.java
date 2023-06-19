@@ -21,7 +21,8 @@ public class FemaleConnections extends Connections {
     // TODO Добавить "дочь"
     enum FemaleTypeConnections {
         mother,
-        wife
+        wife,
+        daughter
     }
 
 
