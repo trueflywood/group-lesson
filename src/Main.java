@@ -1,8 +1,5 @@
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     MainMenu mainMenu;
@@ -15,7 +12,7 @@ public class Main {
         people.add(new Female("Милана", "Янковки","56474637656",35));
 
         // Пример создания людей
-        Person testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45);
+        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45);
         Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45);
         Female testPerson3 = new Female("Екатерина", "Чужая", "453532432445", 22);
         Male testPerson4 = new Male("Сергий", "Висарионович", "453532432445", 63);
@@ -32,8 +29,13 @@ public class Main {
             // Пример добавления связи. сразу устанавливаются 2 связи от testPerson1 к testPerson2 и от testPerson2 к  testPerson1
             ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
 
-            //при повторной установке связь изменится
+            //при повторной установке связь изменится муж-жена
             ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.husband, testPerson2);
+
+            // устанавливаем вторую связь отец-дочь
+            ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.father, testPerson3);
+            // устанавливаем вторую связь отец-сын
+            ((Male) pp).addConnection(MaleConnections.MaleTypeConnections.father, testPerson4);
 
 
         } catch (Exception e) {
@@ -54,15 +56,25 @@ public class Main {
         }
 
 
-        //System.out.println(people);
+         System.out.println(people);
 
-        System.out.println("--");
-        System.out.println(pp);
-        System.out.println("==");
+        // Полученеи родственников первого уровня (Пока только первого и для мужчин)
+        // TODO
+        System.out.println();
+        HashMap<Person, String> list = testPerson1.getKindredByKinship(1, "");
+        for (Map.Entry<Person, String> relationSet:
+                list.entrySet()) {
+            System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
+        }
+        System.out.println();
 
-        System.out.println("--+++++");
-        System.out.println(testPerson2);
-        System.out.println("==");
+//        System.out.println("--");
+//        System.out.println(pp);
+//        System.out.println("==");
+//
+//        System.out.println("--+++++");
+//        System.out.println(testPerson2);
+//        System.out.println("==");
 
 
 

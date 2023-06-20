@@ -18,7 +18,7 @@ public class Male extends Person {
 
    @Override
     public String toString() {
-        return super.toString()+  "=" + gender + "=" + this.connections;
+        return super.toString()+  "=" + gender + "=" + this.connections.size();
     }
 
     @Override
@@ -40,44 +40,84 @@ public class Male extends Person {
      */
     public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) throws Exception {   // TODO Добавить проверку на правильность добавления связи
 
-         this.connections.put(person, connection);
+
         if (person instanceof  Male) {
-            if (!((Male) person).getConnections().containsKey(this)) {
-                System.out.println("test 1 male");
-                switch (connection) {
-                    case father -> {
+
+            switch (connection) {
+                case father -> {
+                    this.connections.put(person, connection);
+                    if (((Male) person).getConnections().get(this) != MaleConnections.MaleTypeConnections.son) {
                         ((Male) person).addConnection(MaleConnections.MaleTypeConnections.son, this);
                     }
-                    case husband -> {
-                        throw new Exception("У мужчины не может быть мужа");
-                    }
-                    case son -> {
+                }
+                case husband -> {
+                    throw new Exception("У мужчины не может быть мужа");
+                }
+                case son -> {
+                    this.connections.put(person, connection);
+                    if (((Male) person).getConnections().get(this) != MaleConnections.MaleTypeConnections.father) {
                         ((Male) person).addConnection(MaleConnections.MaleTypeConnections.father, this);
                     }
                 }
-
             }
         }
         if (person instanceof  Female) {
-            if (!((Female) person).getConnections().containsKey(this)) {
-
-                try {
-                    switch (connection) {
-                        case father -> {
+            this.connections.put(person, connection);
+            try {
+                switch (connection) {
+                    case father -> {
+                        if(((Female) person).getConnections().get(this) != FemaleConnections.FemaleTypeConnections.daughter) {
                             ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.daughter, this);
                         }
-                        case husband -> {
+                    }
+                    case husband -> {
+                        if(((Female) person).getConnections().get(this) != FemaleConnections.FemaleTypeConnections.wife) {
                             ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.wife, this);
                         }
-                        case son -> {
+                    }
+                    case son -> {
+                        if(((Female) person).getConnections().get(this) != FemaleConnections.FemaleTypeConnections.mother) {
                             ((Female) person).addConnection(FemaleConnections.FemaleTypeConnections.mother, this);
                         }
                     }
-                } catch (Exception e) {
-                    System.out.println("Ошибка: " + e.getMessage());
                 }
+            } catch (Exception e) {
+                System.out.println("Ошибка: " + e.getMessage());
+                this.connections.remove(person);
+                ((Female) person).getConnections().remove(this);
+
             }
         }
     }
 
+    public HashMap<Person, String> getKindredByKinship(Integer level, String baseTypeConnection) {
+
+        HashMap<Person, String> kindredList = new HashMap<Person, String>();
+
+        for (Map.Entry<Person, MaleConnections.MaleTypeConnections> connectionSet:
+                this.connections.entrySet()) {
+            Person person = connectionSet.getKey();
+            if(person instanceof Male) {
+                MaleConnections.MaleTypeConnections connectionType = ((Male) person).getRevertConnection(this);
+                String relation = connectionType.toString();
+                // Добавить вычисление связи в зависимости от базовой
+                kindredList.put(person, relation);
+            }
+
+            if(person instanceof Female) {
+                FemaleConnections.FemaleTypeConnections connectionType = ((Female) person).getRevertConnection(this);
+                String relation = connectionType.toString();
+                // Добавить вычисление связи в зависимости от базовой
+                kindredList.put(person, relation);
+            }
+            
+        }
+        return kindredList;
+    }
+
+    public MaleConnections.MaleTypeConnections getRevertConnection(Person person) {
+        return this.connections.get(person);
+    }
 }
+
+

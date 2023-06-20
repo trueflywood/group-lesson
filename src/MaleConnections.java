@@ -44,11 +44,5 @@ public class MaleConnections extends Connections {
         return Objects.hash(getType(), getPerson());
     }
 
-    @Override
-    public String toString() {
-        return "MaleConnections{" +
-                "type=" + type +
-                ", person=" + person +
-                "} " + super.toString();
-    }
+
 }
