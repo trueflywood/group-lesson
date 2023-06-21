@@ -31,7 +31,6 @@ public class MainMenu {
 
     public ActionCodes showMainMenu() throws Exception {
         ActionCodes selectCodeAction;
-
         do {
             System.out.println("Выберите действие:");
             for (ActionCodes m : ActionCodes.values()) {
@@ -49,5 +48,6 @@ public class MainMenu {
             }
         } while (true);
     }
+
 
 }

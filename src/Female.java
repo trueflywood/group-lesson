@@ -3,6 +3,11 @@ import java.util.*;
 public class Female extends Person {
     final Gender gender = Gender.FEMALE;
 
+    @Override
+    public String inFo() {
+        return super.inFo();
+    }
+
     private HashMap<Person, FemaleConnections.FemaleTypeConnections> connections = new HashMap<>();
 
     public Female(String name, String surname, String phone, int age) {
@@ -26,8 +31,6 @@ public class Female extends Person {
     public int hashCode() {
         return Objects.hash(super.hashCode(), gender);
     }
-
-
 
 
     /**
