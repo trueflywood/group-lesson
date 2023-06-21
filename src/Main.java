@@ -1,8 +1,9 @@
-import java.io.FileWriter;
 import java.util.*;
 
 public class Main {
+    private static int step;
     MainMenu mainMenu;
+
     public static void main(String[] args) {
         HashSet<Person> people = new HashSet<Person>();
 

@@ -31,8 +31,6 @@ public class Female extends Person {
     }
 
 
-
-
     /**
      * Кем я являюсь другому человеку PERSON
      * @param person другой человек

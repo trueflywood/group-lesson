@@ -31,7 +31,6 @@ public class MainMenu {
 
     public ActionCodes showMainMenu() throws Exception {
         ActionCodes selectCodeAction;
-
         do {
             System.out.println("Выберите действие:");
             for (ActionCodes m : ActionCodes.values()) {
@@ -50,4 +49,30 @@ public class MainMenu {
         } while (true);
     }
 
+    public static void selectAction(MainMenu.ActionCodes step1, ActionCodes step2){
+        if (step2 == null){
+            switch (step1){
+                case CREATE -> createFolder();
+                case READ -> readFolder();
+                case UPDATE -> updateFolder();
+                case DELETE -> deleteFolder();
+                case EXIT -> exitFolder();
+            }
+        }
+    }
+
+    private static void deleteFolder() {
+    }
+
+    private static void updateFolder() {
+    }
+
+    private static void readFolder() {
+    }
+
+    private static void createFolder() {
+    }
+
+    private static void exitFolder() {
+    }
 }

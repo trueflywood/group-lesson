@@ -15,7 +15,6 @@ public class Male extends Person {
     }
 
 
-
    @Override
     public String toString() {
         return super.toString()+  "=" + gender + "=" + this.connections.size();
