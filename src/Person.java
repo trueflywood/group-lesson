@@ -1,6 +1,6 @@
 import java.util.*;
 
-public abstract class Person {
+public class Person {
 
     private String name;
     private String surname;

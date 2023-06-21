@@ -4,6 +4,11 @@ public class Male extends Person {
 
     final Gender gender = Gender.MALE;
 
+    @Override
+    public String inFo() {
+        return super.inFo();
+    }
+
     private HashMap<Person, MaleConnections.MaleTypeConnections> connections = new HashMap<>();
     public Male(String name, String surname, String phone, int age) {
         super(name, surname, phone, age);

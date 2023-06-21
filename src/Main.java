@@ -84,11 +84,53 @@ public class Main {
 
         try {
             MainMenu.ActionCodes mainChose = menu.showMainMenu();
+            selectAction(mainChose);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
+    }
+    public static void selectAction(MainMenu.ActionCodes step1){
+        switch (step1){
+            case CREATE -> create();
+            case READ -> read();
+            case UPDATE -> update();
+            case DELETE -> delete();
+            case EXIT -> exit();
+        }
+    }
 
+    private static void delete() {
+        System.out.println("Delete");
+    }
+
+    private static void update() {
+        System.out.println("Update");
+    }
+
+    private static void read() {
+        System.out.println("Read");
+    }
+
+    private static void create() {
+        Scanner addscaner;
+        addscaner =  new Scanner(System.in);
+        System.out.println("Create");
+        System.out.println("Enter name : ");
+        String name = addscaner.nextLine();
+        System.out.println("Enter surname : ");
+        String surname = addscaner.nextLine();
+        System.out.println("Enter phone : ");
+        String phone = addscaner.nextLine();
+        System.out.println("Enter age : ");
+        Integer age = addscaner.nextInt();
+        Person person = new Person(name,surname,phone, age);
+        list.add(person);
+        System.out.println("Create");
+    }
+
+    private static void exit() {
+        System.out.println("Exit");
     }
 }
 
