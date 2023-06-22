@@ -5,6 +5,7 @@ public class Main {
     MainMenu mainMenu;
 
     static HashSet<Person> people = new HashSet<Person>();
+    static boolean Exit = true;
     public static void main(String[] args) {
 
         people.add(new Male("Такеши", "Китано","88005553535",76));
@@ -93,12 +94,16 @@ public class Main {
         // Пример вызова меню
         MainMenu menu = new MainMenu();
 
-        try {
-            MainMenu.ActionCodes mainChose = menu.showMainMenu();
-            selectAction(mainChose);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        do {
+            try {
+                MainMenu.ActionCodes mainChose = menu.showMainMenu();
+                selectAction(mainChose);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }while (Exit);
+
 
     }
     public static void selectAction(MainMenu.ActionCodes step1){
@@ -121,6 +126,11 @@ public class Main {
 
     private static void read() {
         System.out.println("Read");
+
+        for (Person s : people) {
+            System.out.println(s.inFo());
+        }
+
     }
 
     private static void create() {
@@ -142,6 +152,7 @@ public class Main {
 
     private static void exit() {
         System.out.println("Exit");
+        Exit = false;
     }
 }
 
