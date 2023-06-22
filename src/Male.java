@@ -127,9 +127,8 @@ public class Male extends Person {
             }
         }
 
-        HashMap<Person, String> subList = new HashMap<Person, String>();
+        HashMap<Person, String> subList = new HashMap<>();
         if(level - 1 > 0) {
-            System.out.println("второй уровень");
             for (Map.Entry<Person, String> kindred:
                     kindredList.entrySet()) {
                 if(kindred.getKey() instanceof  Male){
@@ -139,29 +138,29 @@ public class Male extends Person {
 
                     for (Map.Entry<Person, String> relationSet:
                             subKindredList.entrySet()) {
-                        subList.put(relationSet.getKey(),relationSet.getValue());
+                        if (!subList.containsKey(relationSet.getKey())) {
+                            subList.put(relationSet.getKey(),relationSet.getValue());
+                        }
                     }
                 }
 
-                // TODO разобраться
-//                if(kindred.getKey() instanceof  Female){
-//                    HashMap<Person, String> subKindredList = ((Female) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
-//
-//                    for (Map.Entry<Person, String> relationSet:
-//                            subKindredList.entrySet()) {
-//
-//                        System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
-//
-//                        subList.put(relationSet.getKey(),relationSet.getValue());
-//                    }
-//                }
+
+                if(kindred.getKey() instanceof  Female){
+                    HashMap<Person, String> subKindredList = ((Female) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
+
+                    for (Map.Entry<Person, String> relationSet:
+                            subKindredList.entrySet()) {
+                        if(!subList.containsKey(relationSet.getKey())) {
+                            subList.put(relationSet.getKey(),relationSet.getValue());
+                        }
+                    }
+                }
 
             }
         }
         for (Map.Entry<Person, String> relationSet:
                 subList.entrySet()) {
 
-            System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
             kindredList.put(relationSet.getKey(),relationSet.getValue());
         }
 
