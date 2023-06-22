@@ -4,8 +4,8 @@ public class Main {
     private static int step;
     MainMenu mainMenu;
 
+    static HashSet<Person> people = new HashSet<Person>();
     public static void main(String[] args) {
-        HashSet<Person> people = new HashSet<Person>();
 
         people.add(new Male("Такеши", "Китано","88005553535",76));
         people.add(new Male("Алексей", "Абрамович","3743437863478",63));
@@ -125,7 +125,7 @@ public class Main {
         System.out.println("Enter age : ");
         Integer age = addscaner.nextInt();
         Person person = new Person(name,surname,phone, age);
-        list.add(person);
+        people.add(person);
         System.out.println("Create");
     }
 
