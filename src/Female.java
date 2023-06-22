@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Female extends Person {
     final Gender gender = Gender.FEMALE;
@@ -98,9 +95,67 @@ public class Female extends Person {
         return connections;
     }
 
+
+
+    public HashMap<Person, String> getKindredByKinship(Integer level, String baseTypeConnection) {
+
+        HashMap<Person, String> kindredList = new HashMap<Person, String>();
+
+        for (Map.Entry<Person, FemaleConnections.FemaleTypeConnections> connectionSet:
+                this.connections.entrySet()) {
+            Person person = connectionSet.getKey();
+            if(person instanceof Male) {
+                MaleConnections.MaleTypeConnections connectionType = ((Male) person).getRevertConnection(this);
+                String differentTypeConnection = connectionType.toString();
+
+                // Добавить вычисление связи в зависимости от базовой
+                String fullConnectionName = getFullConnectionName(baseTypeConnection, differentTypeConnection);
+
+                if(!kindredList.containsKey(person)) {
+                    kindredList.put(person, fullConnectionName);
+                }
+            }
+
+            if(person instanceof Female) {
+                FemaleConnections.FemaleTypeConnections connectionType = ((Female) person).getRevertConnection(this);
+                String differentTypeConnection = connectionType.toString();
+
+                // Добавить вычисление связи в зависимости от базовой
+                String fullConnectionName = getFullConnectionName(baseTypeConnection, differentTypeConnection);
+
+                if(!kindredList.containsKey(person)) {
+                    kindredList.put(person, fullConnectionName);
+                }
+
+            }
+        }
+
+        HashMap<Person, String> subList = new HashMap<Person, String>();
+        if(level - 1 > 0) {
+
+            for (Map.Entry<Person, String> kindred:
+                    kindredList.entrySet()) {
+                if(kindred.getKey() instanceof  Male){
+
+                    HashMap<Person, String> subKindredList = ((Male) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
+
+                    subList.putAll(subKindredList);
+                }
+                if(kindred.getKey() instanceof  Female){
+                    HashMap<Person, String> subKindredList = ((Female) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
+                }
+
+            }
+        }
+        kindredList.putAll(subList);
+        return kindredList;
+    }
+
+    protected String getFullConnectionName(String baseTypeConnection, String differentTypeConnection) {
+        return super.getFullConnectionName(baseTypeConnection, differentTypeConnection);
+    }
+
     public FemaleConnections.FemaleTypeConnections getRevertConnection(Person person) {
         return this.connections.get(person);
     }
-
-
 }
