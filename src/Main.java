@@ -6,6 +6,7 @@ public class Main {
 
     static HashSet<Person> people = new HashSet<Person>();
     static boolean Exit = true;
+
     public static void main(String[] args) {
 
         people.add(new Male("Такеши", "Китано","88005553535",76));
@@ -14,8 +15,8 @@ public class Main {
         people.add(new Female("Милана", "Янковки","56474637656",35));
 
         // Пример создания людей
-        Male testPerson1 = new Male("1 Алекс", "Тестович", "4535345345", 45); // муж
-        Person testPerson2 = new Female("2 Алекса", "Тестовая", "453532432445", 45); // жена
+        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45); // муж
+        Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45); // жена
         Female testPerson3 = new Female("3 Екатерина", "Чужая", "453532432445", 22); // дочь
         Male testPerson4 = new Male("4 Сергий", "Висарионович", "453532432445", 63); // сын
         Male testPerson5 = new Male("5 Юрий", "Сергеевич", "453532432445", 3); // внук
@@ -29,7 +30,7 @@ public class Main {
 
         // Пример поиска людей в списке
         Person pp = people.stream()
-                .filter(object -> object.getName().equals("1 Алекс"))
+                .filter(object -> object.getName().equals("Алекс"))
                 .findFirst().get();
 
 
@@ -117,14 +118,14 @@ public class Main {
         MainMenu menu = new MainMenu();
 
 
-//        do {
-//            try {
-//                MainMenu.ActionCodes mainChose = menu.showMainMenu();
-//                selectAction(mainChose);
-//            } catch (Exception e) {
-//                throw new RuntimeException(e);
-//            }
-//        }while (Exit);
+        do {
+            try {
+                MainMenu.ActionCodes mainChose = menu.showMainMenu();
+                selectAction(mainChose);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }while (Exit);
 
 
     }
