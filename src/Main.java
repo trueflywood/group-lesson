@@ -13,12 +13,15 @@ public class Main {
         people.add(new Female("Милана", "Янковки","56474637656",35));
 
         // Пример создания людей
-        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45);
-        Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45);
-        Female testPerson3 = new Female("Екатерина", "Чужая", "453532432445", 22);
-        Male testPerson4 = new Male("Сергий", "Висарионович", "453532432445", 63);
-        Male testPerson5 = new Male("Юрий", "Сергеевич", "453532432445", 3);
-        Male testPerson6 = new Male("василий", "Сергеевич", "453532432445", 3);
+        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45); // муж
+        Female testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45); // жена
+        Female testPerson3 = new Female("Екатерина", "Чужая", "453532432445", 22); // дочь
+        Male testPerson4 = new Male("Сергий", "Висарионович", "453532432445", 63); // сын
+        Male testPerson5 = new Male("Юрий", "Сергеевич", "453532432445", 3); // внук
+        Male testPerson6 = new Male("василий", "Сергеевич", "453532432445", 87); // тесть
+        Female testPerson7 = new Female("василиса", "Игоревна", "453532432445", 98); // теща
+        Person testPerson8 = new Female("Светлана", "Егоровна", "453532432445", 98); // мать
+        Person testPerson9 = new Male("Егор", "Александрович", "453532432445", 98); // отец
 
         people.add(testPerson1);
         people.add(testPerson2);
@@ -45,6 +48,14 @@ public class Main {
             testPerson4.addConnection(MaleConnections.MaleTypeConnections.father, testPerson5);
             // устанавливаем вторую связь отец жены
             testPerson5.addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
+
+            // устанавливаем вторую связь отец жены = тесть
+            testPerson6.addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
+            testPerson7.addConnection(FemaleConnections.FemaleTypeConnections.mother, testPerson2);
+            testPerson1.addConnection(MaleConnections.MaleTypeConnections.son, testPerson8);
+            testPerson1.addConnection(MaleConnections.MaleTypeConnections.son, testPerson9);
+
+
 
 
         } catch (Exception e) {
@@ -76,6 +87,16 @@ public class Main {
         System.out.println("родственники человека " + testPerson1.getName());
         for (Map.Entry<Person, String> relationSet:
                 list.entrySet()) {
+            System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
+        }
+        System.out.println();
+
+        HashMap<Person, String> list2 = testPerson2.getKindredByKinship(2, "");
+        list2.remove(testPerson2);
+
+        System.out.println("родственники человека " + testPerson2.getName());
+        for (Map.Entry<Person, String> relationSet:
+                list2.entrySet()) {
             System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
         }
         System.out.println();
