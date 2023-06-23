@@ -8,7 +8,8 @@ public class MainMenu {
         READ(2, "Прочитать"),
         UPDATE(3, "Изменить имя"),
         DELETE(4, "Удалить"),
-        EXIT(5, "ВЫХОД");
+        SEARCH(5, "Поиск контакта"),
+        EXIT(6, "ВЫХОД");
 
         ActionCodes(int codeAction, String text) {
             this.code = codeAction;

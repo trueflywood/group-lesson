@@ -5,8 +5,6 @@ public class Main {
     MainMenu mainMenu;
 
     static HashSet<Person> people = new HashSet<Person>();
-    static boolean Exit = true;
-
     public static void main(String[] args) {
 
         people.add(new Male("Такеши", "Китано","88005553535",76));
@@ -15,15 +13,12 @@ public class Main {
         people.add(new Female("Милана", "Янковки","56474637656",35));
 
         // Пример создания людей
-        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45); // муж
-        Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45); // жена
-        Female testPerson3 = new Female("3 Екатерина", "Чужая", "453532432445", 22); // дочь
-        Male testPerson4 = new Male("4 Сергий", "Висарионович", "453532432445", 63); // сын
-        Male testPerson5 = new Male("5 Юрий", "Сергеевич", "453532432445", 3); // внук
-        Male testPerson6 = new Male("6 василий", "Сергеевич", "453532432445", 87); // тесть
-        Person testPerson7 = new Female("7 василиса", "Игоревна", "453532432445", 98); // теща
-        Person testPerson8 = new Female("8 Светлана", "Егоровна", "453532432445", 98); // мать
-        Person testPerson9 = new Male("9 Егор", "Александрович", "453532432445", 98); // отец
+        Male testPerson1 = new Male("Алекс", "Тестович", "4535345345", 45);
+        Person testPerson2 = new Female("Алекса", "Тестовая", "453532432445", 45);
+        Female testPerson3 = new Female("Екатерина", "Чужая", "453532432445", 22);
+        Male testPerson4 = new Male("Сергий", "Висарионович", "453532432445", 63);
+        Male testPerson5 = new Male("Юрий", "Сергеевич", "453532432445", 3);
+        Male testPerson6 = new Male("василий", "Сергеевич", "453532432445", 3);
 
         people.add(testPerson1);
         people.add(testPerson2);
@@ -48,14 +43,8 @@ public class Main {
 
             // устанавливаем вторую связь отец-сын для сына = внук
             testPerson4.addConnection(MaleConnections.MaleTypeConnections.father, testPerson5);
-
-            // устанавливаем вторую связь отец жены = тесть
-            testPerson6.addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
-            ((Female)testPerson7).addConnection(FemaleConnections.FemaleTypeConnections.mother, testPerson2);
-            testPerson1.addConnection(MaleConnections.MaleTypeConnections.son, testPerson8);
-            testPerson1.addConnection(MaleConnections.MaleTypeConnections.son, testPerson9);
-
-
+            // устанавливаем вторую связь отец жены
+            testPerson5.addConnection(MaleConnections.MaleTypeConnections.father, testPerson2);
 
 
         } catch (Exception e) {
@@ -78,8 +67,8 @@ public class Main {
 
          System.out.println(people);
 
-        // Полученеи родственников (Пока второго уровня)
-
+        // Полученеи родственников первого уровня (Пока только первого и для мужчин)
+        // TODO
         System.out.println();
         HashMap<Person, String> list = testPerson1.getKindredByKinship(2, "");
         list.remove(testPerson1);
@@ -90,19 +79,6 @@ public class Main {
             System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
         }
         System.out.println();
-
-
-        HashMap<Person, String> list2 = ((Female)testPerson2).getKindredByKinship(2, "");
-        list2.remove(testPerson2);
-
-        System.out.println("родственники человека " + testPerson2.getName());
-        for (Map.Entry<Person, String> relationSet:
-                list2.entrySet()) {
-            System.out.println( relationSet.getKey().getName() + " - " + relationSet.getValue());
-        }
-        System.out.println();
-
-
 
 //        System.out.println("--");
 //        System.out.println(pp);
@@ -117,16 +93,12 @@ public class Main {
         // Пример вызова меню
         MainMenu menu = new MainMenu();
 
-
-        do {
-            try {
-                MainMenu.ActionCodes mainChose = menu.showMainMenu();
-                selectAction(mainChose);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }while (Exit);
-
+        try {
+            MainMenu.ActionCodes mainChose = menu.showMainMenu();
+            selectAction(mainChose);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
     public static void selectAction(MainMenu.ActionCodes step1){
@@ -135,8 +107,19 @@ public class Main {
             case READ -> read();
             case UPDATE -> update();
             case DELETE -> delete();
+            case SEARCH -> search();
             case EXIT -> exit();
         }
+    }
+
+    private static void search() {
+        Scanner scanner =new Scanner(System.in);
+        System.out.println("Введите имя контакта: ");
+        String name = scanner.nextLine();
+        Person person = people.stream()
+                .filter(object -> object.getName().equals(name))
+                .findFirst().get();
+        System.out.println(person.inFo());
     }
 
     private static void delete() {
@@ -149,11 +132,9 @@ public class Main {
 
     private static void read() {
         System.out.println("Read");
-
-        for (Person s : people) {
-            System.out.println(s.inFo());
-        }
-
+        people.forEach( person -> {
+            System.out.println(person.inFo());
+        });
     }
 
     private static void create() {
@@ -175,7 +156,6 @@ public class Main {
 
     private static void exit() {
         System.out.println("Exit");
-        Exit = false;
     }
 }
 
