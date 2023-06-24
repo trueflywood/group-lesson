@@ -54,7 +54,7 @@ public class Person {
     }
 
     public String inFo() {
-        return "|Имя: "+ this.name + " |Фамилия: " + this.surname + " |Номер телефона: " + this.phone + " |Полных лет: " + this.age;
+        return "\n|Имя: "+ this.name + "\n|Фамилия: " + this.surname + "\n|Номер телефона: " + this.phone + "\n|Полных лет: " + this.age;
     }
 
     @Override
