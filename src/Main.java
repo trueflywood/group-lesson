@@ -107,28 +107,92 @@ public class Main {
             case READ -> read();
             case UPDATE -> update();
             case DELETE -> delete();
-            case SEARCH -> search();
             case EXIT -> exit();
         }
     }
 
-    private static void search() {
+    private static void delete() {
+        System.out.println("Удалить контакт");
         Scanner scanner =new Scanner(System.in);
         System.out.println("Введите имя контакта: ");
         String name = scanner.nextLine();
+        System.out.println("Введите мобильный номер: ");
+        String number = scanner.nextLine();
         Person person = people.stream()
-                .filter(object -> object.getName().equals(name))
-                .findFirst().get();
+                .filter(object -> object.getName().equals(name)&&object.getPhone().equals(number))
+                .findAny().orElse(null);
         System.out.println(person.inFo());
-    }
-
-    private static void delete() {
-        System.out.println("Delete");
+        System.out.println("Чтобы удалить контакт нажмите 1 " +" ; " + " Отменить удаление нажмите 2");
+        Scanner scanner1 = new Scanner(System.in);
+        Integer selector = scanner1.nextInt();
+        switch (selector){
+            case 1 : people.remove(person);
+                System.out.println("Контакт удален");
+                read();
+                break;
+            case 2 : System.out.println("Отмена удаления");
+                read();
+                break;
+            default:
+                break;
+        }
     }
 
     private static void update() {
-        System.out.println("Update");
+        System.out.println("Редактировать контакт");
+        Scanner scanner =new Scanner(System.in);
+        System.out.println("Введите имя контакта: ");
+        String name = scanner.nextLine();
+        System.out.println("Введите мобильный номер: ");
+        String number = scanner.nextLine();
+        Person person = people.stream()
+                .filter(object -> object.getName().equals(name)&&object.getPhone().equals(number))
+                .findAny().orElse(null);
+        System.out.println(person.inFo());
+        System.out.println("Что вы хотите изменить?");
+        System.out.println("""
+                                1 - Имя
+                                2 - Фамилию
+                                3 - Номер телефона
+                                4 - Возраст
+                                """);
+        scanner = new Scanner(System.in);
+        Scanner scanner1 = new Scanner(System.in);
+        int change = scanner1.nextInt();
+        switch (change){
+            case 1:
+                System.out.println("Обновите имя : " + person.getName());
+                String changeName = scanner.nextLine();
+                person.setName(changeName);
+                System.out.println("Обновлено");
+                read();
+                break;
+            case 2:
+                System.out.println("Обновите фамилию : " + person.getSurname());
+                String changeSurname = scanner.nextLine();
+                person.setSurname(changeSurname);
+                System.out.println("Обновлено");
+                read();
+                break;
+            case 3:
+                System.out.println("Обновите номер телефона : " + person.getPhone());
+                String changePhone = scanner.nextLine();
+                person.setPhone(changePhone);
+                System.out.println("Обновлено");
+                read();
+                break;
+            case 4:
+                System.out.println("Обновите возраст : " + person.getAge());
+                Integer changeAge = scanner.nextInt();
+                person.setAge(changeAge);
+                System.out.println("Обновлено");
+                read();
+                break;
+            default:
+                break;
+        }
     }
+
 
     private static void read() {
         System.out.println("Read");

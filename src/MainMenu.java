@@ -6,10 +6,9 @@ public class MainMenu {
 
         CREATE(1, "Создать"),
         READ(2, "Прочитать"),
-        UPDATE(3, "Изменить имя"),
+        UPDATE(3, "Изменить контакт"),
         DELETE(4, "Удалить"),
-        SEARCH(5, "Поиск контакта"),
-        EXIT(6, "ВЫХОД");
+        EXIT(5, "ВЫХОД");
 
         ActionCodes(int codeAction, String text) {
             this.code = codeAction;
