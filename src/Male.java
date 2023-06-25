@@ -44,7 +44,6 @@ public class Male extends Person {
      */
     public void addConnection(MaleConnections.MaleTypeConnections connection, Person person) throws Exception {   // TODO Добавить проверку на правильность добавления связи
 
-
         if (person instanceof  Male) {
 
             switch (connection) {
@@ -123,7 +122,6 @@ public class Male extends Person {
                 if(!kindredList.containsKey(person)) {
                     kindredList.put(person, fullConnectionName);
                 }
-
             }
         }
 
@@ -131,27 +129,29 @@ public class Male extends Person {
         if(level - 1 > 0) {
             for (Map.Entry<Person, String> kindred:
                     kindredList.entrySet()) {
-                if(kindred.getKey() instanceof  Male){
+                if(!kindred.getValue().equals("дальний родственник")) {
+                    if(kindred.getKey() instanceof  Male ){
 
-                    HashMap<Person, String> subKindredList = ((Male) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
+                        HashMap<Person, String> subKindredList = ((Male) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
 
-
-                    for (Map.Entry<Person, String> relationSet:
-                            subKindredList.entrySet()) {
-                        if (!subList.containsKey(relationSet.getKey())) {
-                            subList.put(relationSet.getKey(),relationSet.getValue());
+                        for (Map.Entry<Person, String> relationSet:
+                                subKindredList.entrySet()) {
+                            if (!subList.containsKey(relationSet.getKey())) {
+                                subList.put(relationSet.getKey(),relationSet.getValue());
+                            }
                         }
+
                     }
-                }
 
+                    if(kindred.getKey() instanceof  Female){
 
-                if(kindred.getKey() instanceof  Female){
-                    HashMap<Person, String> subKindredList = ((Female) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
+                        HashMap<Person, String> subKindredList = ((Female) kindred.getKey()).getKindredByKinship(level - 1, kindred.getValue());
 
-                    for (Map.Entry<Person, String> relationSet:
-                            subKindredList.entrySet()) {
-                        if(!subList.containsKey(relationSet.getKey())) {
-                            subList.put(relationSet.getKey(),relationSet.getValue());
+                        for (Map.Entry<Person, String> relationSet:
+                                subKindredList.entrySet()) {
+                            if(!subList.containsKey(relationSet.getKey())) {
+                                subList.put(relationSet.getKey(),relationSet.getValue());
+                            }
                         }
                     }
                 }
@@ -160,8 +160,9 @@ public class Male extends Person {
         }
         for (Map.Entry<Person, String> relationSet:
                 subList.entrySet()) {
-
-            kindredList.put(relationSet.getKey(),relationSet.getValue());
+            if(!kindredList.containsKey(relationSet.getKey())) {
+                kindredList.put(relationSet.getKey(),relationSet.getValue());
+            }
         }
 
         return kindredList;
